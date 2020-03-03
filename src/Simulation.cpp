@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <fstream>
 #include "Simulation.h"
 #include "UUID.h"
 #include "EventGen.h"
@@ -27,6 +27,19 @@ int main(int argc, char **argv){
     for(int i = 0; i < 10; i++) {
         eventGenerator->eventTick(network);
     }
+
+    std::ofstream csvFile
+    csvFile.open("csvFile.csv", std::ofstream::out | std::ofstream::app);
+    for (int i = 0; i < uuidList.size(); i++){
+        UUID uuid = network->getNodes().getUUID();
+        Keyspace kS = network->getNodes().getKeySpace();
+        double kGR = network->getNodes().getKeyGenSpace();
+        bool active = network->getNodes().getActive();
+        double pR = network->getNodes().getProvisioningRatio();
+        file << uuid << ", " << kS << ", " << kGR << ", " << active << ", " << pR << "\n";
+    }
+    csvFile.close();
+
 
     network->printUUIDList();
     network->printChannels();
