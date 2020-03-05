@@ -15,7 +15,7 @@ class Node {
 private:
     UUID uuid;
     Keyspace keySpace;
-    int keyShareRate;
+    double keyShareRate;
     double keyGenRate;
     double aggregateGenRate;
     double shortTermAllocationRatio;
@@ -40,26 +40,33 @@ public:
     double getKeyGenRate() const { return keyGenRate; }
     void setKeyGenRate(double kgr) { keyGenRate = kgr; }
 
-    /**
-     *
-     * @return
-     */
-    int getKeyShareRate() const { return keyShareRate; }
-    void setKeyShareRate(int ksr) { keyShareRate = ksr; }
+    double getKeyShareRate() const { return keyShareRate; }
+    void setKeyShareRate(double ksr) { keyShareRate = ksr; }
 
-    /**
-     *
-     * @return
-     */
+    double getAggregateKGenRate() const { return aggregateGenRate; }
+    void setAggregateGenRate(double agr) { aggregateGenRate = agr; }
+
+    double getShortTermAllocationRatio() const { return shortTermAllocationRatio; }
+    void setShortTermAllocationRatio(double star) { shortTermAllocationRatio = star; }
+
+    double getLongTermAllocationRatio() const { return longTermAllocationRatio; }
+    void setLongTermAllocationRatio(double lar) { longTermAllocationRatio = lar; }
+
+    double getAggregateAllocationRatio() const { return aggregateAllocationRatio; }
+    void setAggregateAllocationRatio(double aar) { aggregateAllocationRatio = aar; }
+
+    double getProvisioningRatio() const { return provisioningRatio; }
+    void setProvisioningRatio(double pr) { provisioningRatio = pr; }
+
     bool getActive() const { return active; }
     void setActive(bool a) { active = a; }
 
-    Keyspace createKeySpace();
-    double computeAggregateGenRate();
-    double computeShortTermAllocationRatio();
+    //Keyspace createKeySpace();
+    //double computeAggregateGenRate();
+    /*double computeShortTermAllocationRatio();
     double computeLongTermAllocationRatio();
     double computeAggregateAllocationRatio();
-    double computeProvisioningRatio();
+    double computeProvisioningRatio();*/
 };
 
 #endif //LIGHTSYSTEMP_NODE_H

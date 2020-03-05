@@ -38,7 +38,15 @@ public:
     void broadcastMsg(std::string message, UUID fromNode);
 
     UUID getRandomNode();
-    Node* getNodeFromUUID(UUID uuid) const { return nodes.find(uuid)->second; }
+//    Node* getNodeFromUUID(UUID uuid) const { return nodes.find(uuid)->second; }
+    Node* getNodeFromUUID(UUID uuid) {
+        for(auto const& x : nodes) {
+            if(x.first == uuid) {
+                return x.second;
+            }
+        }
+        return nullptr;
+    }
 
     void addNode(Node* node);
 

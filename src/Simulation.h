@@ -3,9 +3,8 @@
 
 #include "UUID.h"
 #include "Network.h"
-
-// TODO: change to JSON parameter
-static const int AMOUNT_OF_NODES = 10;
+#include <iostream>
+#include <fstream>
 
 class Simulation {
 private:
