@@ -50,7 +50,7 @@ void Simulation::run() {
             "\nMin Key: " << tomTest->getKeySpace().at(Nodedata->getMinKeyIndex(tomSpace)).getStart() <<
             "\nSuffix: " << tomTest->getKeySpace().at(0).getSuffix()<<
             "\nFinal Key in actual test: " << tomTest->getKeySpace().at(0).getEnd() <<
-            "\nProvisional Ration: " << Nodedata->updateProvisioningRatio(Nodedata->getKeysUsed(), Nodedata->getShortTermAllocationRatio());
+            "\nProvisional Ratio: " << Nodedata->updateProvisioningRatio(Nodedata->getKeysUsed(), Nodedata->getShortTermAllocationRatio());
     network.printChannels();
     network.printKeyspaces();
 }
