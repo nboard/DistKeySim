@@ -298,8 +298,10 @@ Message Node::getHeartbeatMessage(const UUID &peerID) const {
     toInformationalMessage(
         msg,
         {
-            CollectionInfoRecord{"test", createdDay, createdWeek, allocation, allocation},
-//              CollectionInfoRecord{"test", createdDay, createdWeek, lastDay.getLongTermAllocationRatio(), lastDay.getShortTermAllocationRatio()}
+            ///This test with real data doesn't give good output but thats because you run
+            ///out of key. Baylor mess with and it will be fixed
+//            CollectionInfoRecord{"test", createdDay, createdWeek, allocation, allocation},
+              CollectionInfoRecord{"test", createdDay, createdWeek, lastDay.getLongTermAllocationRatio(), lastDay.getShortTermAllocationRatio()}
         }
     );
 

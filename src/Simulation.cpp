@@ -17,9 +17,9 @@ Simulation::Simulation(const struct Config &config)
 void Simulation::run() {
     // Create root node that will have the max keyspace 0/0
     network.addRootNode();
-    shared_ptr<Node> tomTest = this->network.getNodeFromUUID(this->network.getRandomNode());
 
     cout << "Root UUID: " << network.getNodes().begin()->first << endl;
+    shared_ptr<Node> tomTest = this->network.getNodeFromUUID(this->network.getRandomNode());
 
     // Create new nodes and add them to the map
     for (int i = 0; i < numNodes; i++) {
