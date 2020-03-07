@@ -17,6 +17,7 @@ Simulation::Simulation(const struct Config &config)
 void Simulation::run() {
     // Create root node that will have the max keyspace 0/0
     network.addRootNode();
+    shared_ptr<Node> tomTest = this->network.getNodeFromUUID(this->network.getRandomNode());
 
     cout << "Root UUID: " << network.getNodes().begin()->first << endl;
 
@@ -31,7 +32,7 @@ void Simulation::run() {
         network.checkAndSendAllNodes();
         network.doAllHeartbeat();
     }
-    
+
     // Loop for EventTicks
 //    Random eventGen;
 //    for (int i = 0; i < 10; i++) {
@@ -39,14 +40,14 @@ void Simulation::run() {
 //        network.checkAndSendAllNodes();
 //    }
 
-    shared_ptr<Node> tomTest = this->network.getNodeFromUUID(this->network.getRandomNode());
     shared_ptr<NodeData> Nodedata = tomTest->getNodeData();
     vector<Keyspace> tomSpace = tomTest->getKeySpace();
+    double tempKeys = NodeData().getKeysUsed() <= 1 ? 1 : NodeData().getKeysUsed();
     //Nodedata->setCreationRate(10.0);
     cout << "Creation Rate: " << Nodedata->getKeysUsed() <<
             "\nLong Term Allocation: " << Nodedata->updateLongTermAllocationRatio(tomSpace) <<
             "\nShort Term Allocation: " << Nodedata->updateShortTermAllocationRatio(tomSpace) <<
-            "\nEnd Key: " << Nodedata->findEndKey(Nodedata->getCreationRate(), tomSpace) <<
+            "\nEnd Key: " << Nodedata->findEndKey(tempKeys, tomSpace) <<
             "\nMin Key: " << tomTest->getKeySpace().at(Nodedata->getMinKeyIndex(tomSpace)).getStart() <<
             "\nSuffix: " << tomTest->getKeySpace().at(0).getSuffix()<<
             "\nFinal Key in actual test: " << tomTest->getKeySpace().at(0).getEnd() <<

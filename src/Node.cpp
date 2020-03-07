@@ -260,7 +260,7 @@ void Node::shareKeyspace(Message &msg) {
 
         newKeyspace = KeyspaceExchangeRecord{"share", myNewEnd, myEnd2, suffix};
 
-        keyspaces.at(minKeyspaceIndex) = Keyspace(myStart2, myNewEnd, mySuffix);
+        keyspaces.at(minKeyspaceIndex) = Keyspace(myStart2, myNewEnd, suffix);
     }
 
     // Update message type and contents
@@ -299,6 +299,7 @@ Message Node::getHeartbeatMessage(const UUID &peerID) const {
         msg,
         {
             CollectionInfoRecord{"test", createdDay, createdWeek, allocation, allocation},
+//              CollectionInfoRecord{"test", createdDay, createdWeek, lastDay.getLongTermAllocationRatio(), lastDay.getShortTermAllocationRatio()}
         }
     );
 

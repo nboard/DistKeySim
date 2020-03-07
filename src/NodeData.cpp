@@ -37,14 +37,26 @@ double NodeData::updateLongTermAllocationRatio(vector<Keyspace> &keyspace) {
     return longTermRatio;
 }
 
+/**
+ * Baylor Look at this function may give issues if keys run out. It will print Errors for you but thats more of a warning
+ * fix how you distribute stuff.
+ */
 double NodeData::updateShortTermAllocationRatio(const vector<Keyspace> &keyspace){
-    double tempKeys = keysUsed > 0 ? keysUsed : 1;
+    double tempKeys = keysUsed <= 1 ? 1 : keysUsed;
 
+
+    ADAK_Key_t startKey;
+    ADAK_Key_t endKey;
 
 
     int minIndex = getMinKeyIndex(keyspace);
-    ADAK_Key_t startKey = keyspace.at(minIndex).getStart();
-    ADAK_Key_t endKey = findEndKey(tempKeys, keyspace);
+    if(minIndex != -1) {
+        startKey = keyspace.at(minIndex).getStart();
+        endKey = findEndKey(tempKeys, keyspace);
+    }else{
+        cout << "Error there is no keyspace left in this function" <<endl;
+        return -1.0;
+    }
 
     ///-2 means you ran out of keyspace thus set the ratio to one saying we need more keyspace right away.
     ///Baylor you may want to change this if you want a different value saying I need help right away.
